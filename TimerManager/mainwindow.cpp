@@ -28,7 +28,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_GetMil_clicked()
 {
     unsigned int milliSec = HwTimer->GetMilliseconds();
-    qsTemp = QString("Now is %1 Milliseconds").arg(milliSec);
+    qsTemp = QString("Now is %1 MilliSeconds").arg(milliSec);
     ui->label_time->setText(qsTemp);
     ui->lcdNumber->display( (int) milliSec);
 }
@@ -62,7 +62,7 @@ void MainWindow::turnLedOff()
 void MainWindow::on_pushButton_StartTimer_clicked()
 {
     double fDelay = ui->doubleSpinBox->value();
-    qsTemp = QString("Get HW Timer Interapt after %1 sec").arg(fDelay);
+    qsTemp = QString("Get HW Timer Interupt after %1 sec").arg(fDelay);
     ui->label_time->setText(qsTemp);
 
     HwTimer->HwTimerStart(int(fDelay * 1000));

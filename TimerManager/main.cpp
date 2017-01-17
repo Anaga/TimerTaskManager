@@ -25,8 +25,8 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
             break;
 
         case QtInfoMsg:
-            stream << "Info: "<<qsLine;
-            consol << "Info: "<<qsLine;
+            stream << "Info:  "<<qsLine;
+            consol << "Info:  "<<qsLine;
             break;
 
         case QtWarningMsg:
