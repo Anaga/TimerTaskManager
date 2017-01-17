@@ -14,7 +14,6 @@ typedef struct timerRec{
     bool isActive;
     QString qsFnName;
     int (*cbFunc)(void *);
-    //void *cbFunc;
     void *cbArg;
 } timerRec ;
 
@@ -33,8 +32,9 @@ public:
 
     int addTask(int startUp, int repeat, QString qsTaskName);
     int deleteTask(QString qsTaskName);
-    int addCbFunc(int startUp, int repeat, int (*cb_func)(void *), void *cb_arg);
 
+    int addCbFunc(int startUp, int repeat, int (*cb_func)(void *), void *cb_arg);    
+    int removeCbFunc(int (*cb_func)(void *));
 signals:
 
 public slots:

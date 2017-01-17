@@ -33,22 +33,15 @@ private slots:
     void turnLedOn();
     void turnLedOff();
 
-
     void on_pushButton_add1_clicked();
-
     void on_pushButton_add2_clicked();
-
-    void on_pushButton_rem1_clicked();
-
-    void on_pushButton_rem2_clicked();
-
     void on_pushButton_add3_clicked();
-
-    void on_pushButton_rem3_clicked();
-
     void on_pushButton_addCb1_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_rem1_clicked();
+    void on_pushButton_rem2_clicked();
+    void on_pushButton_rem3_clicked();
+    void on_pushButton_rem1a_clicked();
 
 private:
     Ui::MainWindow *ui;

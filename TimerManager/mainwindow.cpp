@@ -87,11 +87,13 @@ void MainWindow::on_pushButton_Stop_clicked()
 
 
 int cb_func1(void *arg){
-    QString qsTemp = "app %1!";
-    qDebug() << "cb_func1 runs";
-    char *pArr = (char *) arg;
-    qsTemp = qsTemp.arg(pArr);
+    qDebug() << QString("cb_func1 runs with arg \'%1\'").arg((char *) arg);
+    return 1;
+}
 
+int cb_func1a(void *arg){
+    qDebug() << "cb 1a";
+    qDebug() << (char*) arg;
     return 1;
 }
 
@@ -125,8 +127,11 @@ void MainWindow::on_pushButton_add1_clicked()
     vP = (void *) ArgForFunc1;
     int (*cb) (void *); // Function pointer
 
+    uint startUpTime = uint(1000 * ui->doubleSpinBox_t1_Start->value());
+    uint redoTime = uint(1000* ui->doubleSpinBox_t1_Redo->value());
+
     cb = cb_func1;
-    timMang->addCbFunc(1000,1000, cb, vP);
+    timMang->addCbFunc(startUpTime, redoTime, cb, vP);
 }
 
 void MainWindow::on_pushButton_add2_clicked()
@@ -137,45 +142,42 @@ void MainWindow::on_pushButton_add2_clicked()
     int (*cb) (void *); // Function pointer
     cb = cb_func2;
     */
-    timMang->addCbFunc(5000,1000, cb_func2, ArgForFunc2);
+    uint startUpTime = uint(1000 * ui->doubleSpinBox_t2_Start->value());
+    uint redoTime = uint(1000* ui->doubleSpinBox_t2_Redo->value());
+    timMang->addCbFunc(startUpTime, redoTime, cb_func2, ArgForFunc2);
 }
 
 void MainWindow::on_pushButton_add3_clicked()
 {
-    timMang->addCbFunc(15000,0, cb_func3, ArgForFunc3);
+    uint startUpTime = uint(1000 * ui->doubleSpinBox_t3_Start->value());
+    uint redoTime = uint(1000* ui->doubleSpinBox_t3_Redo->value());
+    timMang->addCbFunc(startUpTime, redoTime, cb_func3, ArgForFunc3);
 }
 
 void MainWindow::on_pushButton_rem1_clicked()
 {
-    timMang->deleteTask("Task 1 ");
+    timMang->removeCbFunc(cb_func1);
 }
 
 void MainWindow::on_pushButton_rem2_clicked()
 {
-    timMang->deleteTask("Task 2 ");
+    timMang->removeCbFunc(cb_func2);
 }
-
 
 void MainWindow::on_pushButton_rem3_clicked()
 {
-     timMang->deleteTask("Singli Task 3 ");
-}
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    void *vP;
-    vP = (void *) ArgForFunc1;
-    qDebug() << "cb_func1 is " << (cb_func1(vP));
+    timMang->removeCbFunc(cb_func3);
 }
 
 void MainWindow::on_pushButton_addCb1_clicked()
-{
-    void *vP;
-    vP = (void *) ArgForFunc2;
-    int (*cb) (void *); // Function pointer
-
-    cb = cb_func1;
-    timMang->addCbFunc(1000,1000, cb, vP);
+{   
+    uint startUpTime = uint(1000 * ui->doubleSpinBox_t4_Start->value());
+    uint redoTime = uint(1000* ui->doubleSpinBox_t4_Redo->value());
+    timMang->addCbFunc(startUpTime, redoTime, cb_func1a, ArgForFunc4);
 }
 
+
+void MainWindow::on_pushButton_rem1a_clicked()
+{
+    timMang->removeCbFunc(cb_func1a);
+}
