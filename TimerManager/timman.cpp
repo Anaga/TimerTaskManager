@@ -83,16 +83,13 @@ int TimerManager::deleteTask(QString qsTaskName)
 
 int TimerManager::addCbFunc(int startUp, int repeat, int (*cb_func)(void *), void*cb_arg)
 {
-    int (*cb_fn)(void *);
-    void *cb_a;
-    int cbVal;
     QString qsFuncName = "Function number %1";
-    int cb =0;
+   // int cb =0;
     ptRec = recArr;
    // void * test;
-    cb = cb_func(cb_arg);
-    qsFuncName = qsFuncName.arg(cb);
-    qsTemp = QString("StartUp %1, repeat%2, qsFuncName%3)").arg(startUp).arg(repeat).arg(qsFuncName);
+  //  cb = cb_func(cb_arg);
+  //  qsFuncName = qsFuncName.arg(cb);
+    qsTemp = QString("StartUp %1, Repeat%2, qsFuncName%3)").arg(startUp).arg(repeat).arg(qsFuncName);
 
     qDebug() << qsTemp;
 
@@ -110,11 +107,6 @@ int TimerManager::addCbFunc(int startUp, int repeat, int (*cb_func)(void *), voi
                 HwTimer->HwTimerStart(1);
                 isAnyTaskActive = true;
             }
-
-            cb_fn = ptRec->cbFunc;
-            cb_a  = ptRec->cbArg;
-            cbVal = cb_fn(cb_a);
-            qDebug() << cbVal;
             return i+1;
         }
     }
@@ -132,10 +124,6 @@ void TimerManager::on_HwInterupt()
     void *cb_arg;
     int cbVal;
 
-    int (*cb_fn)(void *);
-    void *cb_a;
-    //int cbVal;
-
     ptRec = recArr;
     isAnyTaskActive = false;
     for (i=0; i< MAX_CB_NUMBER; i++, ptRec++){
@@ -152,11 +140,6 @@ void TimerManager::on_HwInterupt()
                     cb_arg  = ptRec->cbArg;
                     cbVal = cb_func(cb_arg);
                     qDebug() << "Return is " << cbVal;
-
-                    cb_fn = ptRec->cbFunc;
-                    cb_a  = ptRec->cbArg;
-                    cbVal = cb_fn(cb_a);
-                    qDebug() << cbVal;
                 }
 
                 if (isSinglCall){
